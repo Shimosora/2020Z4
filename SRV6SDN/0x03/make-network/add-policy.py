@@ -55,7 +55,17 @@ def main():
     rule["target_dst"] = "10.2.0.15"
     rule["functions"] = ["FF:2::1", "FF:3::1","FF:1::1"]
     ensure_rule(rule)
-
+    
+    #- id: 300
+    # target_src: 10.1.0.11 #C1
+    # target_dst: 10.2.0.16 #C6
+    # functions: [FF:1::1,FF:2::1]
+    
+    rule["id"] = "300"
+    rule["target_src"] = "10.1.0.11"
+    rule["target_dst"] = "10.2.0.16"
+    rule["functions"] = ["FF:1::1","FF:2::1"]
+    ensure_rule(rule) 
 
 if __name__ == '__main__':
     main()
