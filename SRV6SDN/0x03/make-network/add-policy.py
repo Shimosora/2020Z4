@@ -1,4 +1,6 @@
 import subprocess
+import yaml
+import pprint
 
 def ensure_rule(rule):
     # TODO: KOKO_NI_NANIKA_WO_KAKU!!
@@ -35,37 +37,46 @@ def ensure_rule(rule):
 
 
 def main():
+
+    config = {}
+    with open("./policy.yml") as yml:
+        config = yaml.load(yml, Loader=yaml.SafeLoader)
+
+    pprint.pprint(config)
+
+    for rule in config["rules"]:
+        ensure_rule(rule)
     #- id: 100
     #  target_src: 10.1.0.11 #C1
     #  target_dst: 10.2.0.14 #C4
     #  functions: [FF:1::1, FF:2::1]
-    rule = {}
-    rule["id"] = "100"
-    rule["target_src"] = "10.1.0.11"
-    rule["target_dst"] = "10.2.0.14"
-    rule["functions"] = ["FF:1::1", "FF:2::1"]
-    ensure_rule(rule)
+   # rule = {}
+   # rule["id"] = "100"
+   # rule["target_src"] = "10.1.0.11"
+   # rule["target_dst"] = "10.2.0.14"
+   # rule["functions"] = ["FF:1::1", "FF:2::1"]
+   # ensure_rule(rule)
 
-    #- id: 200
-    #  target_src: 10.1.0.11 #C1
-    #  target_dst: 10.2.0.15 #C5
-    #  functions: [FF:2::1, FF:3::1, FF:1::1]
-    rule["id"] = "200"
-    rule["target_src"] = "10.1.0.11"
-    rule["target_dst"] = "10.2.0.15"
-    rule["functions"] = ["FF:2::1", "FF:3::1","FF:1::1"]
-    ensure_rule(rule)
-    
-    #- id: 300
-    # target_src: 10.1.0.11 #C1
-    # target_dst: 10.2.0.16 #C6
-    # functions: [FF:1::1,FF:2::1]
-    
-    rule["id"] = "300"
-    rule["target_src"] = "10.1.0.11"
-    rule["target_dst"] = "10.2.0.16"
-    rule["functions"] = ["FF:1::1","FF:2::1"]
-    ensure_rule(rule) 
+   # #- id: 200
+   # #  target_src: 10.1.0.11 #C1
+   # #  target_dst: 10.2.0.15 #C5
+   # #  functions: [FF:2::1, FF:3::1, FF:1::1]
+   # rule["id"] = "200"
+   # rule["target_src"] = "10.1.0.11"
+   # rule["target_dst"] = "10.2.0.15"
+   # rule["functions"] = ["FF:2::1", "FF:3::1","FF:1::1"]
+   # ensure_rule(rule)
+   # 
+   # #- id: 300
+   # # target_src: 10.1.0.11 #C1
+   # # target_dst: 10.2.0.16 #C6
+   # # functions: [FF:1::1,FF:2::1]
+   # 
+   # rule["id"] = "300"
+   # rule["target_src"] = "10.1.0.11"
+   # rule["target_dst"] = "10.2.0.16"
+   # rule["functions"] = ["FF:1::1","FF:2::1"]
+   # ensure_rule(rule) 
 
 if __name__ == '__main__':
     main()
